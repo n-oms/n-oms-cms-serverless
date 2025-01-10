@@ -1,0 +1,50 @@
+{
+    "printWidth": 100,
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "jsxSingleQuote": false,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "arrowParens": "always",
+    "proseWrap": "preserve",
+    "htmlWhitespaceSensitivity": "css",
+    "endOfLine": "lf",
+    "embeddedLanguageFormatting": "auto",
+    "singleAttributePerLine": false,
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "options": {
+                "parser": "typescript"
+            }
+        },
+        {
+            "files": ["*.json", "*.jsonc"],
+            "options": {
+                "parser": "json"
+            }
+        },
+        {
+            "files": ["*.yaml", "*.yml"],
+            "options": {
+                "parser": "yaml"
+            }
+        }
+    ],
+    "ignorePath": ".gitignore",
+    "include": ["./**/*.{js,ts,json,yaml,yml}"],
+    "exclude": [
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/coverage/**",
+        "**/.serverless/**",
+        "**/.webpack/**",
+        "**/package-lock.json",
+        "**/yarn.lock"
+    ]
+}

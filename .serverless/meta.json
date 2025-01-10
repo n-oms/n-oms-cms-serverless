@@ -1,0 +1,534 @@
+{
+  "C:\\Users\\hp\\applications\\n-oms-cms-serverless": {
+    "versionSfCore": null,
+    "versionFramework": "4.4.18",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeResolverProviders": {
+      "default-aws-credential-resolver": "<REDACTED>",
+      "env": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "n-oms-cms-serverless",
+            "useDotenv": true,
+            "provider": {
+              "name": "aws",
+              "runtime": "nodejs18.x",
+              "region": "us-east-1",
+              "stage": "dev",
+              "versionFunctions": true,
+              "remoteFunctionData": {
+                "Configuration": {
+                  "FunctionName": "n-oms-cms-serverless-dev-crudApi",
+                  "FunctionArn": "arn:aws:lambda:us-east-1:625492852104:function:n-oms-cms-serverless-dev-crudApi",
+                  "Runtime": "nodejs18.x",
+                  "Role": "arn:aws:iam::625492852104:role/n-oms-cms-serverless-dev-us-east-1-lambdaRole",
+                  "Handler": "lambdas/crud/handler.handler",
+                  "CodeSize": 2066727,
+                  "Description": "",
+                  "Timeout": 6,
+                  "MemorySize": 1024,
+                  "LastModified": "2025-01-09T18:17:47.000+0000",
+                  "CodeSha256": "1ALcnQU/MjXlCyI0UeVW9uh4XymToxnD1Iz6ApD8iS8=",
+                  "Version": "$LATEST",
+                  "VpcConfig": {
+                    "SubnetIds": [],
+                    "SecurityGroupIds": [],
+                    "VpcId": "",
+                    "Ipv6AllowedForDualStack": false
+                  },
+                  "Environment": {
+                    "Variables": {
+                      "NODE_OPTIONS": "--enable-source-maps",
+                      "MULTI_TENANT_DB_URL": "mongodb+srv://arunrajeevan:TTest11041991@cluster0.alkek.mongodb.net/multi-tenant-n-oms?retryWrites=true&w=majority"
+                    }
+                  },
+                  "KMSKeyArn": null,
+                  "TracingConfig": {
+                    "Mode": "PassThrough"
+                  },
+                  "MasterArn": null,
+                  "RevisionId": "ee1729ad-4063-4c08-a513-5b63ec90e04e",
+                  "State": "Active",
+                  "StateReason": null,
+                  "StateReasonCode": null,
+                  "LastUpdateStatus": "Successful",
+                  "LastUpdateStatusReason": null,
+                  "LastUpdateStatusReasonCode": null,
+                  "PackageType": "Zip",
+                  "SigningProfileVersionArn": null,
+                  "SigningJobArn": null,
+                  "Architectures": [
+                    "x86_64"
+                  ],
+                  "EphemeralStorage": {
+                    "Size": 512
+                  },
+                  "SnapStart": {
+                    "ApplyOn": "None",
+                    "OptimizationStatus": "Off"
+                  },
+                  "RuntimeVersionConfig": {
+                    "RuntimeVersionArn": "arn:aws:lambda:us-east-1::runtime:8865cfc6a1d3f2dfabf5c509eaa9fbd70aa12fa4bbe614047030158c21978bcc"
+                  },
+                  "LoggingConfig": {
+                    "LogFormat": "Text",
+                    "ApplicationLogLevel": null,
+                    "SystemLogLevel": null,
+                    "LogGroup": "/aws/lambda/n-oms-cms-serverless-dev-crudApi"
+                  },
+                  "Layers": []
+                },
+                "Code": {
+                  "RepositoryType": "S3",
+                  "Location": "https://prod-iad-c1-djusa-tasks.s3.us-east-1.amazonaws.com/snapshots/625492852104/n-oms-cms-serverless-dev-crudApi-b8461c5c-fc82-472c-990e-b3072b669706?versionId=h4dWhPvl7lOF4xHxgaGbe0AbPQg6NtVB&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIAvwUojyyvpuFmwiNfIKlWu9Tp4l1RJGqM0oP0SU%2FNS%2BAiEAgNKHrs83lpJynEx5TgLGjpQozb5Enge1lkxlupgWmhUqkgIIkv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAEGgw0NzkyMzMwMjUzNzkiDCGRgu423dtRbeHaJSrmAap7VSv0HIBdc3qM4FRJwLEe9X%2BY%2FTgmWvRLvmoUMktlTFBtvCO1Ed2XzGet0DLTqrADvcPCtabqlNxaeBdPRPI2iTkUP%2BHJPyNUhJxSMZ2jNMESuYUmFgi%2FsKQPkS05ZDF8vpcZHeM6m94vovAHGpChMsKzY9aUJZ34QHvSPw5OqEIqm6JIPNkbB0oL3l%2B8MzsJEgVm8H3XWjXutkfkW2R2ZJe%2Bc4V2r9m9XXtHe2wHdihyG4LugAloYHjmIZ9jRIEVkSDTf1aXqQmsC67exRtlMVqbfkF1YKdbRKBsf02zeTFPrHQwMMWIgLwGOo8BMKSY1H8CQF8T3dn3%2BMxCG1K1stIj%2FYzObzSxS1p9lKjqNZY%2FTbcU2HxBol5FZoHTx1i%2Fw5omaNPgxR3GqKLUpaWMQ9u2e%2FpcQ9bcGjeVKDODghZp1dt9QKBfL0ZKmI620KrOA3a3lN1zZUhJscp3NkcBLPLtqA3JruNnb%2BnlEWTxbl%2BM95%2F94lrpHZ3cp2s%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250109T191239Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAW7FEDUVRXM5LVE7N%2F20250109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=2add874c781e83c1027763542ad8b2fd0c2c773afdb010141ad4bef154d16001",
+                  "ImageUri": null,
+                  "ResolvedImageUri": null
+                },
+                "Tags": {
+                  "aws:cloudformation:stack-name": "n-oms-cms-serverless-dev",
+                  "aws:cloudformation:stack-id": "arn:aws:cloudformation:us-east-1:625492852104:stack/n-oms-cms-serverless-dev/acf74ba0-ce78-11ef-92d9-122e5b2498f9",
+                  "STAGE": "dev",
+                  "aws:cloudformation:logical-id": "CrudApiLambdaFunction"
+                }
+              }
+            },
+            "package": {
+              "individually": true,
+              "excludeDevDependencies": true,
+              "artifactsS3KeyDirname": "serverless/n-oms-cms-serverless/dev/code-artifacts"
+            },
+            "functions": {
+              "crudApi": {
+                "handler": "lambdas/crud/handler.handler",
+                "events": [
+                  {
+                    "sqs": {
+                      "arn": {
+                        "Fn::GetAtt": [
+                          "multiTenantNomsCmsSqsQueue",
+                          "Arn"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "environment": {
+                  "MULTI_TENANT_DB_URL": "mongodb+srv://arunrajeevan:TTest11041991@cluster0.alkek.mongodb.net/multi-tenant-n-oms?retryWrites=true&w=majority",
+                  "NODE_OPTIONS": "--enable-source-maps"
+                },
+                "name": "n-oms-cms-serverless-dev-crudApi",
+                "package": {
+                  "artifact": "C:\\Users\\hp\\applications\\n-oms-cms-serverless\\.serverless\\build\\n-oms-cms-serverless-crudApi.zip"
+                }
+              }
+            },
+            "resources": {
+              "Resources": {
+                "multiTenantNomsCmsDeadLetterQueue": {
+                  "Type": "AWS::SQS::Queue",
+                  "Properties": {
+                    "QueueName": "multi-tenant-cms-dead-letter-queue-dev"
+                  }
+                },
+                "multiTenantNomsCmsSqsQueue": {
+                  "Type": "AWS::SQS::Queue",
+                  "Properties": {
+                    "QueueName": "multi-tenant-cms-queue-dev",
+                    "RedrivePolicy": {
+                      "deadLetterTargetArn": {
+                        "Fn::GetAtt": [
+                          "multiTenantNomsCmsDeadLetterQueue",
+                          "Arn"
+                        ]
+                      },
+                      "maxReceiveCount": 5
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "configFileDirPath": "C:\\Users\\hp\\applications\\n-oms-cms-serverless",
+          "config": {
+            "type": "env"
+          },
+          "options": {
+            "function": "crudApi"
+          },
+          "stage": "dev",
+          "dashboard": null,
+          "logger": {
+            "namespace": "s:core:resolver:env",
+            "prefix": null,
+            "prefixColor": null
+          },
+          "_credentialsPromise": "<REDACTED>"
+        },
+        "resolvers": {}
+      },
+      "sls": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "n-oms-cms-serverless",
+            "useDotenv": true,
+            "provider": {
+              "name": "aws",
+              "runtime": "nodejs18.x",
+              "region": "us-east-1",
+              "stage": "dev",
+              "versionFunctions": true,
+              "remoteFunctionData": {
+                "Configuration": {
+                  "FunctionName": "n-oms-cms-serverless-dev-crudApi",
+                  "FunctionArn": "arn:aws:lambda:us-east-1:625492852104:function:n-oms-cms-serverless-dev-crudApi",
+                  "Runtime": "nodejs18.x",
+                  "Role": "arn:aws:iam::625492852104:role/n-oms-cms-serverless-dev-us-east-1-lambdaRole",
+                  "Handler": "lambdas/crud/handler.handler",
+                  "CodeSize": 2066727,
+                  "Description": "",
+                  "Timeout": 6,
+                  "MemorySize": 1024,
+                  "LastModified": "2025-01-09T18:17:47.000+0000",
+                  "CodeSha256": "1ALcnQU/MjXlCyI0UeVW9uh4XymToxnD1Iz6ApD8iS8=",
+                  "Version": "$LATEST",
+                  "VpcConfig": {
+                    "SubnetIds": [],
+                    "SecurityGroupIds": [],
+                    "VpcId": "",
+                    "Ipv6AllowedForDualStack": false
+                  },
+                  "Environment": {
+                    "Variables": {
+                      "NODE_OPTIONS": "--enable-source-maps",
+                      "MULTI_TENANT_DB_URL": "mongodb+srv://arunrajeevan:TTest11041991@cluster0.alkek.mongodb.net/multi-tenant-n-oms?retryWrites=true&w=majority"
+                    }
+                  },
+                  "KMSKeyArn": null,
+                  "TracingConfig": {
+                    "Mode": "PassThrough"
+                  },
+                  "MasterArn": null,
+                  "RevisionId": "ee1729ad-4063-4c08-a513-5b63ec90e04e",
+                  "State": "Active",
+                  "StateReason": null,
+                  "StateReasonCode": null,
+                  "LastUpdateStatus": "Successful",
+                  "LastUpdateStatusReason": null,
+                  "LastUpdateStatusReasonCode": null,
+                  "PackageType": "Zip",
+                  "SigningProfileVersionArn": null,
+                  "SigningJobArn": null,
+                  "Architectures": [
+                    "x86_64"
+                  ],
+                  "EphemeralStorage": {
+                    "Size": 512
+                  },
+                  "SnapStart": {
+                    "ApplyOn": "None",
+                    "OptimizationStatus": "Off"
+                  },
+                  "RuntimeVersionConfig": {
+                    "RuntimeVersionArn": "arn:aws:lambda:us-east-1::runtime:8865cfc6a1d3f2dfabf5c509eaa9fbd70aa12fa4bbe614047030158c21978bcc"
+                  },
+                  "LoggingConfig": {
+                    "LogFormat": "Text",
+                    "ApplicationLogLevel": null,
+                    "SystemLogLevel": null,
+                    "LogGroup": "/aws/lambda/n-oms-cms-serverless-dev-crudApi"
+                  },
+                  "Layers": []
+                },
+                "Code": {
+                  "RepositoryType": "S3",
+                  "Location": "https://prod-iad-c1-djusa-tasks.s3.us-east-1.amazonaws.com/snapshots/625492852104/n-oms-cms-serverless-dev-crudApi-b8461c5c-fc82-472c-990e-b3072b669706?versionId=h4dWhPvl7lOF4xHxgaGbe0AbPQg6NtVB&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIAvwUojyyvpuFmwiNfIKlWu9Tp4l1RJGqM0oP0SU%2FNS%2BAiEAgNKHrs83lpJynEx5TgLGjpQozb5Enge1lkxlupgWmhUqkgIIkv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAEGgw0NzkyMzMwMjUzNzkiDCGRgu423dtRbeHaJSrmAap7VSv0HIBdc3qM4FRJwLEe9X%2BY%2FTgmWvRLvmoUMktlTFBtvCO1Ed2XzGet0DLTqrADvcPCtabqlNxaeBdPRPI2iTkUP%2BHJPyNUhJxSMZ2jNMESuYUmFgi%2FsKQPkS05ZDF8vpcZHeM6m94vovAHGpChMsKzY9aUJZ34QHvSPw5OqEIqm6JIPNkbB0oL3l%2B8MzsJEgVm8H3XWjXutkfkW2R2ZJe%2Bc4V2r9m9XXtHe2wHdihyG4LugAloYHjmIZ9jRIEVkSDTf1aXqQmsC67exRtlMVqbfkF1YKdbRKBsf02zeTFPrHQwMMWIgLwGOo8BMKSY1H8CQF8T3dn3%2BMxCG1K1stIj%2FYzObzSxS1p9lKjqNZY%2FTbcU2HxBol5FZoHTx1i%2Fw5omaNPgxR3GqKLUpaWMQ9u2e%2FpcQ9bcGjeVKDODghZp1dt9QKBfL0ZKmI620KrOA3a3lN1zZUhJscp3NkcBLPLtqA3JruNnb%2BnlEWTxbl%2BM95%2F94lrpHZ3cp2s%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250109T191239Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAW7FEDUVRXM5LVE7N%2F20250109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=2add874c781e83c1027763542ad8b2fd0c2c773afdb010141ad4bef154d16001",
+                  "ImageUri": null,
+                  "ResolvedImageUri": null
+                },
+                "Tags": {
+                  "aws:cloudformation:stack-name": "n-oms-cms-serverless-dev",
+                  "aws:cloudformation:stack-id": "arn:aws:cloudformation:us-east-1:625492852104:stack/n-oms-cms-serverless-dev/acf74ba0-ce78-11ef-92d9-122e5b2498f9",
+                  "STAGE": "dev",
+                  "aws:cloudformation:logical-id": "CrudApiLambdaFunction"
+                }
+              }
+            },
+            "package": {
+              "individually": true,
+              "excludeDevDependencies": true,
+              "artifactsS3KeyDirname": "serverless/n-oms-cms-serverless/dev/code-artifacts"
+            },
+            "functions": {
+              "crudApi": {
+                "handler": "lambdas/crud/handler.handler",
+                "events": [
+                  {
+                    "sqs": {
+                      "arn": {
+                        "Fn::GetAtt": [
+                          "multiTenantNomsCmsSqsQueue",
+                          "Arn"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "environment": {
+                  "MULTI_TENANT_DB_URL": "mongodb+srv://arunrajeevan:TTest11041991@cluster0.alkek.mongodb.net/multi-tenant-n-oms?retryWrites=true&w=majority",
+                  "NODE_OPTIONS": "--enable-source-maps"
+                },
+                "name": "n-oms-cms-serverless-dev-crudApi",
+                "package": {
+                  "artifact": "C:\\Users\\hp\\applications\\n-oms-cms-serverless\\.serverless\\build\\n-oms-cms-serverless-crudApi.zip"
+                }
+              }
+            },
+            "resources": {
+              "Resources": {
+                "multiTenantNomsCmsDeadLetterQueue": {
+                  "Type": "AWS::SQS::Queue",
+                  "Properties": {
+                    "QueueName": "multi-tenant-cms-dead-letter-queue-dev"
+                  }
+                },
+                "multiTenantNomsCmsSqsQueue": {
+                  "Type": "AWS::SQS::Queue",
+                  "Properties": {
+                    "QueueName": "multi-tenant-cms-queue-dev",
+                    "RedrivePolicy": {
+                      "deadLetterTargetArn": {
+                        "Fn::GetAtt": [
+                          "multiTenantNomsCmsDeadLetterQueue",
+                          "Arn"
+                        ]
+                      },
+                      "maxReceiveCount": 5
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "configFileDirPath": "C:\\Users\\hp\\applications\\n-oms-cms-serverless",
+          "config": {
+            "type": "sls"
+          },
+          "options": {
+            "function": "crudApi"
+          },
+          "stage": "dev",
+          "dashboard": null,
+          "logger": {
+            "namespace": "s:core:resolver:sls",
+            "prefix": null,
+            "prefixColor": null
+          },
+          "_credentialsPromise": "<REDACTED>"
+        },
+        "resolvers": {}
+      }
+    },
+    "composeServiceName": null,
+    "servicePath": "C:\\Users\\hp\\applications\\n-oms-cms-serverless",
+    "serviceConfigFileName": "serverless.ts",
+    "service": {
+      "service": "n-oms-cms-serverless",
+      "useDotenv": true,
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs18.x",
+        "region": "us-east-1",
+        "stage": "dev",
+        "versionFunctions": true,
+        "remoteFunctionData": {
+          "Configuration": {
+            "FunctionName": "n-oms-cms-serverless-dev-crudApi",
+            "FunctionArn": "arn:aws:lambda:us-east-1:625492852104:function:n-oms-cms-serverless-dev-crudApi",
+            "Runtime": "nodejs18.x",
+            "Role": "arn:aws:iam::625492852104:role/n-oms-cms-serverless-dev-us-east-1-lambdaRole",
+            "Handler": "lambdas/crud/handler.handler",
+            "CodeSize": 2066727,
+            "Description": "",
+            "Timeout": 6,
+            "MemorySize": 1024,
+            "LastModified": "2025-01-09T18:17:47.000+0000",
+            "CodeSha256": "1ALcnQU/MjXlCyI0UeVW9uh4XymToxnD1Iz6ApD8iS8=",
+            "Version": "$LATEST",
+            "VpcConfig": {
+              "SubnetIds": [],
+              "SecurityGroupIds": [],
+              "VpcId": "",
+              "Ipv6AllowedForDualStack": false
+            },
+            "Environment": {
+              "Variables": {
+                "NODE_OPTIONS": "--enable-source-maps",
+                "MULTI_TENANT_DB_URL": "mongodb+srv://arunrajeevan:TTest11041991@cluster0.alkek.mongodb.net/multi-tenant-n-oms?retryWrites=true&w=majority"
+              }
+            },
+            "KMSKeyArn": null,
+            "TracingConfig": {
+              "Mode": "PassThrough"
+            },
+            "MasterArn": null,
+            "RevisionId": "ee1729ad-4063-4c08-a513-5b63ec90e04e",
+            "State": "Active",
+            "StateReason": null,
+            "StateReasonCode": null,
+            "LastUpdateStatus": "Successful",
+            "LastUpdateStatusReason": null,
+            "LastUpdateStatusReasonCode": null,
+            "PackageType": "Zip",
+            "SigningProfileVersionArn": null,
+            "SigningJobArn": null,
+            "Architectures": [
+              "x86_64"
+            ],
+            "EphemeralStorage": {
+              "Size": 512
+            },
+            "SnapStart": {
+              "ApplyOn": "None",
+              "OptimizationStatus": "Off"
+            },
+            "RuntimeVersionConfig": {
+              "RuntimeVersionArn": "arn:aws:lambda:us-east-1::runtime:8865cfc6a1d3f2dfabf5c509eaa9fbd70aa12fa4bbe614047030158c21978bcc"
+            },
+            "LoggingConfig": {
+              "LogFormat": "Text",
+              "ApplicationLogLevel": null,
+              "SystemLogLevel": null,
+              "LogGroup": "/aws/lambda/n-oms-cms-serverless-dev-crudApi"
+            },
+            "Layers": []
+          },
+          "Code": {
+            "RepositoryType": "S3",
+            "Location": "https://prod-iad-c1-djusa-tasks.s3.us-east-1.amazonaws.com/snapshots/625492852104/n-oms-cms-serverless-dev-crudApi-b8461c5c-fc82-472c-990e-b3072b669706?versionId=h4dWhPvl7lOF4xHxgaGbe0AbPQg6NtVB&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIAvwUojyyvpuFmwiNfIKlWu9Tp4l1RJGqM0oP0SU%2FNS%2BAiEAgNKHrs83lpJynEx5TgLGjpQozb5Enge1lkxlupgWmhUqkgIIkv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAEGgw0NzkyMzMwMjUzNzkiDCGRgu423dtRbeHaJSrmAap7VSv0HIBdc3qM4FRJwLEe9X%2BY%2FTgmWvRLvmoUMktlTFBtvCO1Ed2XzGet0DLTqrADvcPCtabqlNxaeBdPRPI2iTkUP%2BHJPyNUhJxSMZ2jNMESuYUmFgi%2FsKQPkS05ZDF8vpcZHeM6m94vovAHGpChMsKzY9aUJZ34QHvSPw5OqEIqm6JIPNkbB0oL3l%2B8MzsJEgVm8H3XWjXutkfkW2R2ZJe%2Bc4V2r9m9XXtHe2wHdihyG4LugAloYHjmIZ9jRIEVkSDTf1aXqQmsC67exRtlMVqbfkF1YKdbRKBsf02zeTFPrHQwMMWIgLwGOo8BMKSY1H8CQF8T3dn3%2BMxCG1K1stIj%2FYzObzSxS1p9lKjqNZY%2FTbcU2HxBol5FZoHTx1i%2Fw5omaNPgxR3GqKLUpaWMQ9u2e%2FpcQ9bcGjeVKDODghZp1dt9QKBfL0ZKmI620KrOA3a3lN1zZUhJscp3NkcBLPLtqA3JruNnb%2BnlEWTxbl%2BM95%2F94lrpHZ3cp2s%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250109T191239Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAW7FEDUVRXM5LVE7N%2F20250109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=2add874c781e83c1027763542ad8b2fd0c2c773afdb010141ad4bef154d16001",
+            "ImageUri": null,
+            "ResolvedImageUri": null
+          },
+          "Tags": {
+            "aws:cloudformation:stack-name": "n-oms-cms-serverless-dev",
+            "aws:cloudformation:stack-id": "arn:aws:cloudformation:us-east-1:625492852104:stack/n-oms-cms-serverless-dev/acf74ba0-ce78-11ef-92d9-122e5b2498f9",
+            "STAGE": "dev",
+            "aws:cloudformation:logical-id": "CrudApiLambdaFunction"
+          }
+        }
+      },
+      "package": {
+        "individually": true,
+        "excludeDevDependencies": true,
+        "artifactsS3KeyDirname": "serverless/n-oms-cms-serverless/dev/code-artifacts"
+      },
+      "functions": {
+        "crudApi": {
+          "handler": "lambdas/crud/handler.handler",
+          "events": [
+            {
+              "sqs": {
+                "arn": {
+                  "Fn::GetAtt": [
+                    "multiTenantNomsCmsSqsQueue",
+                    "Arn"
+                  ]
+                }
+              }
+            }
+          ],
+          "environment": {
+            "MULTI_TENANT_DB_URL": "mongodb+srv://arunrajeevan:TTest11041991@cluster0.alkek.mongodb.net/multi-tenant-n-oms?retryWrites=true&w=majority",
+            "NODE_OPTIONS": "--enable-source-maps"
+          },
+          "name": "n-oms-cms-serverless-dev-crudApi",
+          "package": {
+            "artifact": "C:\\Users\\hp\\applications\\n-oms-cms-serverless\\.serverless\\build\\n-oms-cms-serverless-crudApi.zip"
+          }
+        }
+      },
+      "resources": {
+        "Resources": {
+          "multiTenantNomsCmsDeadLetterQueue": {
+            "Type": "AWS::SQS::Queue",
+            "Properties": {
+              "QueueName": "multi-tenant-cms-dead-letter-queue-dev"
+            }
+          },
+          "multiTenantNomsCmsSqsQueue": {
+            "Type": "AWS::SQS::Queue",
+            "Properties": {
+              "QueueName": "multi-tenant-cms-queue-dev",
+              "RedrivePolicy": {
+                "deadLetterTargetArn": {
+                  "Fn::GetAtt": [
+                    "multiTenantNomsCmsDeadLetterQueue",
+                    "Arn"
+                  ]
+                },
+                "maxReceiveCount": 5
+              }
+            }
+          }
+        }
+      }
+    },
+    "serviceRawFile": "import { AWS } from '@serverless/typescript';\nimport { env } from './lib/env';\nimport { createLambdaFunctionList } from './lib/createLambdaFunctionList';\nimport * as lambdas from './lambdas';\nimport { resources } from './resources';\n\nexport const serverlessConfiguration: AWS = {\n    service: 'n-oms-cms-serverless',\n    useDotenv: true,\n    provider: {\n        name: 'aws',\n        runtime: 'nodejs18.x',\n        region: env.REGION as AWS['provider']['region'],\n        stage: env.STAGE,\n    },\n    package: {\n        individually: true,\n        excludeDevDependencies: true,\n    },\n    functions: createLambdaFunctionList({ lambdas }),\n    resources: {\n        Resources: resources as NonNullable<AWS['resources']>['Resources'],\n    },\n};\n\nexport default serverlessConfiguration;\n",
+    "command": [
+      "deploy",
+      "function"
+    ],
+    "options": {
+      "function": "crudApi"
+    },
+    "error": null,
+    "params": {},
+    "machineId": "582382107af25c8d9723bd4b1593695f",
+    "stage": "dev",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "db376f5a-8996-4b52-8f21-3911cf679c53",
+    "orgName": "outstanding-infrastructure",
+    "userId": "76044f80-ea38-4a4b-882c-b02b6c7b2588",
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "76044f80-ea38-4a4b-882c-b02b6c7b2588",
+    "subscription": null,
+    "userEmail": "nikeshkumartk2020@gmail.com",
+    "serviceProviderAwsRegion": "us-east-1",
+    "serviceProviderAwsCredentials": "<REDACTED>",
+    "serviceProviderAwsAccountId": "625492852104",
+    "projectType": "traditional",
+    "versionSf": "4.4.18",
+    "serviceProviderAwsCfStackName": "n-oms-cms-serverless-dev",
+    "integrations": {},
+    "serviceUniqueId": "arn:aws:cloudformation:us-east-1:625492852104:stack/n-oms-cms-serverless-dev/acf74ba0-ce78-11ef-92d9-122e5b2498f9",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:625492852104:stack/n-oms-cms-serverless-dev/acf74ba0-ce78-11ef-92d9-122e5b2498f9",
+    "serviceProviderAwsCfStackCreated": "2025-01-09T10:58:36.615Z",
+    "serviceProviderAwsCfStackUpdated": "2025-01-09T17:54:36.799Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "CrudApiLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:625492852104:function:n-oms-cms-serverless-dev-crudApi:8",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-n-oms-cms-serverless-dev-CrudApiLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-framework-deployments-us-east-1-dd404128-32b8",
+        "ExportName": "sls-n-oms-cms-serverless-dev-ServerlessDeploymentBucketName"
+      }
+    ]
+  }
+}
