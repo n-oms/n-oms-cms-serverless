@@ -2,7 +2,7 @@ import { bindMethods } from '../../utils';
 import { zodSchemas } from '../../validations';
 import { DbService } from '../db/db.service';
 import { ModelService } from '../model.service';
-import { CreateInTargetDbInput } from './cmsCrud.types';
+import { CreateInTargetDbInput, UpdateItemInTargetDbInput } from './cmsCrud.types';
 
 export class CmsCrudService {
     private readonly dbService: DbService;
@@ -40,6 +40,41 @@ export class CmsCrudService {
             options: { closeConnection: true },
             connection,
             logger: input.logger,
+        });
+
+        input.logger.info('Item created in target db', { result });
+
+        return result;
+    }
+
+    async updateItemInTargetDb(input: UpdateItemInTargetDbInput) {
+        const tenantDbUrl = await this.dbService.getTenantDBUrl({
+            tenantId: input.tenantId,
+        });
+
+        let data = input.data;
+
+        if (input.isDataValidationRequired) {
+            const zodSchema = zodSchemas[input.targetCollection];
+            if (!zodSchema) {
+                throw new Error('Invalid collection name or schema not provided');
+            }
+            data = zodSchema.parse(data);
+        }
+
+        const { Model: TargetCollectionModel, connection } =
+            this.modelService.createModelFromConnection({
+                url: tenantDbUrl,
+                modelName: input.targetCollection,
+            });
+
+        const result = await this.dbService.updateItemUsingConnection({
+            data,
+            model: TargetCollectionModel,
+            options: { closeConnection: true },
+            connection,
+            logger: input.logger,
+            filter: input.filter,
         });
 
         input.logger.info('Item created in target db', { result });

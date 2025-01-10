@@ -2,7 +2,7 @@ import { DB_URLS } from '../../constants';
 import { Tenant, tenantSchema } from '../../schemas/tenant';
 import { bindMethods } from '../../utils';
 import { ModelService } from '../model.service';
-import { CreateDbItemInput } from './db.types';
+import { CreateDbItemInput, UpdateDbItemInput } from './db.types';
 
 export class DbService {
     private readonly modelService: ModelService;
@@ -47,6 +47,25 @@ export class DbService {
     }: CreateDbItemInput) {
         try {
             const result = await model.create(data);
+            if (options.closeConnection && connection) {
+                await connection.close();
+            }
+            return result;
+        } catch (error) {
+            logger.error({ message: 'Error creating item', error });
+        }
+    }
+
+    async updateItemUsingConnection({
+        data,
+        model,
+        options,
+        connection,
+        logger,
+        filter,
+    }: UpdateDbItemInput) {
+        try {
+            const result = await model.updateOne(filter, data);
             if (options.closeConnection && connection) {
                 await connection.close();
             }

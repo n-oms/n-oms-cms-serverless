@@ -10,3 +10,14 @@ export type CreateDbItemInput = {
         closeConnection?: boolean;
     };
 };
+
+export type UpdateDbItemInput = {
+    model: mongoose.Model<any>;
+    data: Record<string, unknown>;
+    filter: Record<string, unknown>;
+    logger: Logger;
+    connection?: mongoose.Connection;
+    options: {
+        closeConnection?: boolean;
+    };
+};
