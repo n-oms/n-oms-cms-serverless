@@ -65,7 +65,7 @@ export class DbService {
         filter,
     }: UpdateDbItemInput) {
         try {
-            const result = await model.updateOne(filter, data);
+            const result = await model.updateOne(filter, data, { new: true });
             if (options.closeConnection && connection) {
                 await connection.close();
             }

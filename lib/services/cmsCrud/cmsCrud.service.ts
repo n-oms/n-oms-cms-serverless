@@ -10,6 +10,7 @@ export class CmsCrudService {
 
     constructor() {
         this.dbService = new DbService();
+        this.modelService = new ModelService();
         bindMethods(this);
     }
 
@@ -17,6 +18,12 @@ export class CmsCrudService {
         const tenantDbUrl = await this.dbService.getTenantDBUrl({
             tenantId: input.tenantId,
         });
+
+        input.logger.info('Tenant DB URL', { tenantDbUrl });
+
+        if (!tenantDbUrl) {
+            throw new Error('Tenant DB URL not found');
+        }
 
         let data = input.data;
 
@@ -34,6 +41,8 @@ export class CmsCrudService {
                 modelName: input.targetCollection,
             });
 
+        input.logger.info('Model created', { TargetCollectionModel });
+
         const result = await this.dbService.createItemUsingConnection({
             data,
             model: TargetCollectionModel,
@@ -48,6 +57,7 @@ export class CmsCrudService {
     }
 
     async updateItemInTargetDb(input: UpdateItemInTargetDbInput) {
+        console.log('Input', JSON.stringify(input));
         const tenantDbUrl = await this.dbService.getTenantDBUrl({
             tenantId: input.tenantId,
         });

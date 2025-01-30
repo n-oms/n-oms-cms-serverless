@@ -1,8 +1,9 @@
 import { AWS } from '@serverless/typescript';
-import { env } from './lib/env';
+import { DEPLOYMENT_ENVS, env } from './lib/env';
 import { createLambdaFunctionList } from './lib/createLambdaFunctionList';
 import * as lambdas from './lambdas';
 import { resources } from './resources';
+import { createDynamoArn } from './lib/utils';
 
 export const serverlessConfiguration: AWS = {
     service: 'n-oms-cms-serverless',
@@ -12,6 +13,20 @@ export const serverlessConfiguration: AWS = {
         runtime: 'nodejs18.x',
         region: env.REGION as AWS['provider']['region'],
         stage: env.STAGE,
+        iamRoleStatements: [
+            {
+                Effect: 'Allow',
+                Action: [
+                    'dynamodb:GetItem',
+                    'dynamodb:PutItem',
+                    'dynamodb:UpdateItem',
+                    'dynamodb:DeleteItem',
+                    'dynamodb:Query',
+                    'dynamodb:Scan',
+                ],
+                Resource: [createDynamoArn({ tableName: DEPLOYMENT_ENVS.DYNAMODB_TABLE_NAME })],
+            },
+        ],
     },
     package: {
         individually: true,

@@ -25,3 +25,23 @@ export type ResourceDefinition = {
     UpdateReplacePolicy?: string;
     Condition?: string;
 };
+
+export enum TenantStoreApiActions {
+    CREATE = 'CREATE',
+    READ = 'READ',
+    UPDATE = 'UPDATE',
+    DELETE = 'DELETE',
+}
+
+export enum TenantStoreAdminActions {
+    CREATE_TENANT = 'CREATE_TENANT',
+    GET_ALL_TENANTS = 'GET_ALL_TENANTS',
+}
+
+export type TenantStoreApiBody = {
+    action: TenantStoreApiActions;
+    data: unknown;
+    tenantId: string;
+    targetCollection: string;
+    filter?: Record<string, unknown>;
+};

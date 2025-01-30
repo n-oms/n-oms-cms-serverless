@@ -2,7 +2,7 @@ import { Logger } from '@aws-lambda-powertools/logger';
 import { SQSEvent, SQSRecord } from 'aws-lambda';
 import { CmsCrudService } from '../../lib/services/cmsCrud/cmsCrud.service';
 import { bindMethods, ILambdaService, parseSqsrecordBody } from '../../lib/utils';
-import { CrudApiActions, CrudApiBody, crudApiBodySchema } from './crud.types';
+import { CrudApiActions, CrudApiBody, crudApiBodySchema } from './types';
 
 export class CmsCrudApiLambdaHandlerService implements ILambdaService {
     static cmsCrudApiLambdaService: CmsCrudApiLambdaHandlerService;
@@ -47,7 +47,7 @@ export class CmsCrudApiLambdaHandlerService implements ILambdaService {
                     tenantId: body.tenantId,
                 });
             }
-            case CrudApiActions.UPDATE_ONE: {
+            case CrudApiActions.UPDATE: {
                 return await this.cmsCrudService.updateItemInTargetDb({
                     data: body.data as Record<string, unknown>,
                     filter: body.filter || {},

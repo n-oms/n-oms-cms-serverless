@@ -15,7 +15,7 @@ export class ModelService {
         let dbSchema = schema;
 
         if (!dbSchema) {
-            dbSchema = new mongoose.Schema<T>({});
+            dbSchema = new mongoose.Schema<T>({}, { strict: false, timestamps: true });
         }
 
         return { Model: connection.model<T>(modelName, dbSchema), connection };

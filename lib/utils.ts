@@ -1,10 +1,10 @@
 import { Logger } from '@aws-lambda-powertools/logger';
-import { env } from './env';
-import { SQSRecord } from 'aws-lambda';
-import { record, ZodSchema } from 'zod';
+import { APIGatewayProxyEvent, SQSRecord } from 'aws-lambda';
+import { ZodSchema } from 'zod';
+import { DEPLOYMENT_ENVS, env } from './env';
 
 export const createResourceName = (name: string) => {
-    return `multi-tenant-cms-${name}-${env.STAGE}`;
+    return `multi-tenant-cms-${name}`;
 };
 
 export const createSqsArn = ({ queueName }: { queueName: string }) => {
@@ -43,3 +43,53 @@ export function bindMethods<T>(instance: T): T {
     });
     return instance;
 }
+
+export const queryStringToJson = (queryString: string): Record<string, string> => {
+    return queryString
+        .split('&') // Split the query string into key-value pairs
+        .reduce(
+            (acc, pair) => {
+                const [key, value] = pair.split('=').map(decodeURIComponent); // Decode and split key and value
+                acc[key] = value; // Add the key-value pair to the result object
+                return acc;
+            },
+            {} as Record<string, string>,
+        );
+};
+
+export const lambdaResponse = ({ status, data }: { status: number; data: unknown }) => {
+    return {
+        statusCode: status,
+        body: JSON.stringify(data),
+    };
+};
+
+export const convertApiGatewayEventToData = <T>({ event }: { event: APIGatewayProxyEvent }): T => {
+    return typeof event.body === 'string' ? JSON.parse(event.body || '{}') : event.body;
+};
+
+export const parseApiGatewayEvent = <T>({
+    event,
+    schema,
+}: {
+    event: APIGatewayProxyEvent;
+    schema: ZodSchema<T>;
+}): T => {
+    const body = convertApiGatewayEventToData<T>({ event });
+    return schema.parse(body);
+};
+
+export const parseApiGatewayEventbody = <T>({
+    body,
+    schema,
+}: {
+    body: unknown;
+    schema: ZodSchema<T>;
+}): T => {
+    const parsedBody = typeof body === 'string' ? JSON.parse(body) : body;
+    return schema.parse(parsedBody);
+};
+
+export const createDynamoArn = ({ tableName }: { tableName: string }) => {
+    return `arn:aws:dynamodb:${DEPLOYMENT_ENVS.REGION}:${DEPLOYMENT_ENVS.ACCOUNT_ID}:table/${tableName}`;
+};

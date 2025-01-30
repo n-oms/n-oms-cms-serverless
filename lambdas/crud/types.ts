@@ -3,7 +3,7 @@ import { z } from 'zod';
 export enum CrudApiActions {
     CREATE = 'CREATE',
     READ = 'READ',
-    UPDATE_ONE = 'UPDATE_ONE',
+    UPDATE = 'UPDATE',
     DELETE = 'DELETE',
 }
 
