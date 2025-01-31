@@ -21,3 +21,11 @@ export type UpdateDbItemInput = {
         closeConnection?: boolean;
     };
 };
+
+export type ReadItemUsingConnection = {
+    model: mongoose.Model<any>;
+    filter: Record<string, any>;
+    logger: Logger;
+    connection: mongoose.Connection;
+    closeConnection?: boolean;
+};

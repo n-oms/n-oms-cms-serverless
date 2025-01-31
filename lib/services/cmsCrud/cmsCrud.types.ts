@@ -16,3 +16,11 @@ export type UpdateItemInTargetDbInput = {
     logger: Logger;
     tenantId: string;
 };
+
+export type ReadItemFromTargetDB = {
+    targetCollection: string;
+    filter: Record<string, unknown>;
+    logger: Logger;
+    tenantId: string;
+    tenantDatabaseUrl: string;
+};

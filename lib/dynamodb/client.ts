@@ -1,11 +1,13 @@
+import { Logger } from '@aws-lambda-powertools/logger';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DEPLOYMENT_ENVS, env } from '../env';
 import {
     DynamoDBDocumentClient,
     GetCommand,
     PutCommand,
     QueryCommand,
+    QueryCommandInput,
 } from '@aws-sdk/lib-dynamodb';
+import { env } from '../env';
 import { GetItem, PutItem } from './types';
 
 export const dynamoDbClient = new DynamoDBClient({ region: env.REGION });
@@ -58,8 +60,27 @@ export const putDdbItem = async <T>({ item, tableName, logger }: PutItem) => {
     return response;
 };
 
-export const getDdbItems = () => {
+export const queryDdbItems = async <T>({
+    query,
+    logger,
+}: {
+    query: Omit<QueryCommandInput, 'TableName'>;
+    logger: Logger;
+}) => {
+    logger.info('Querying items from DynamoDB', { query });
+
     const command = new QueryCommand({
         TableName: env.DYNAMODB_TABLE_NAME,
+        ...query,
     });
+
+    const result = await dynamoDbDocumentClient.send(command);
+
+    if (!result) {
+        return undefined;
+    }
+
+    logger.info('Items retrieved from DynamoDB', { items: result.Items });
+
+    return result.Items as T[];
 };

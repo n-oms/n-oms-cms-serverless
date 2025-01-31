@@ -37,7 +37,10 @@ export class TenantStoreAdminHandler {
                 return lambdaResponse({ status: 200, data: tenantConfig });
             }
             case TenantStoreAdminActions.GET_ALL_TENANTS: {
-                const tenants = await this.cmsTenantStoreAdminService;
+                const tenants = await this.cmsTenantStoreAdminService.getAllTenants({
+                    logger: this.logger,
+                });
+                return lambdaResponse({ status: 200, data: tenants });
             }
         }
     }

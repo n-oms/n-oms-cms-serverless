@@ -2,6 +2,7 @@ import { Logger } from '@aws-lambda-powertools/logger';
 import { APIGatewayProxyEvent, SQSRecord } from 'aws-lambda';
 import { ZodSchema } from 'zod';
 import { DEPLOYMENT_ENVS, env } from './env';
+import { NotFoundException } from './errors/not-found';
 
 export const createResourceName = (name: string) => {
     return `multi-tenant-cms-${name}`;
@@ -60,12 +61,32 @@ export const queryStringToJson = (queryString: string): Record<string, string> =
 export const lambdaResponse = ({ status, data }: { status: number; data: unknown }) => {
     return {
         statusCode: status,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Methods': '*',
+        },
         body: JSON.stringify(data),
     };
 };
 
 export const convertApiGatewayEventToData = <T>({ event }: { event: APIGatewayProxyEvent }): T => {
     return typeof event.body === 'string' ? JSON.parse(event.body || '{}') : event.body;
+};
+
+export const getEventAction = <T>({ event }: { event: APIGatewayProxyEvent }): T => {
+    const body = typeof event.body === 'string' ? JSON.parse(event.body || '{}') : event.body;
+
+    if (!body.action) {
+        throw new NotFoundException('Action not found in event body');
+    }
+
+    return body.action;
+};
+
+export const getEventInfo = ({ event }: { event: APIGatewayProxyEvent }) => {
+    const body = typeof event.body === 'string' ? JSON.parse(event.body || '{}') : event.body;
+    return { action: body.action, body };
 };
 
 export const parseApiGatewayEvent = <T>({

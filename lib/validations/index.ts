@@ -8,8 +8,7 @@ export const zodSchemas = {
 
 export const TenantStoreApiBodySchema = z.object({
     action: z.nativeEnum(TenantStoreApiActions),
-    data: z.unknown(),
-    tenantId: z.string(),
+    data: z.unknown().optional(),
     targetCollection: z.string(),
     filter: z.record(z.unknown()).optional(),
 });

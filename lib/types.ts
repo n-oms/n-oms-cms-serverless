@@ -1,4 +1,5 @@
 import { AWS } from '@serverless/typescript';
+import { APIGatewayProxyEvent } from 'aws-lambda';
 
 export type FunctionDefinition = NonNullable<AWS['functions']>[string];
 
@@ -44,4 +45,15 @@ export type TenantStoreApiBody = {
     tenantId: string;
     targetCollection: string;
     filter?: Record<string, unknown>;
+};
+
+export type TenantConfig = {
+    tenantId: string;
+    apiKey: string;
+    databaseUrl: string;
+    tenantName: string;
+};
+
+export type StoreApiEvent = APIGatewayProxyEvent & {
+    tenantInfo: TenantConfig;
 };

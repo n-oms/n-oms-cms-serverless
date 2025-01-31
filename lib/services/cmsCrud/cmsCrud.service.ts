@@ -2,7 +2,11 @@ import { bindMethods } from '../../utils';
 import { zodSchemas } from '../../validations';
 import { DbService } from '../db/db.service';
 import { ModelService } from '../model.service';
-import { CreateInTargetDbInput, UpdateItemInTargetDbInput } from './cmsCrud.types';
+import {
+    CreateInTargetDbInput,
+    ReadItemFromTargetDB,
+    UpdateItemInTargetDbInput,
+} from './cmsCrud.types';
 
 export class CmsCrudService {
     private readonly dbService: DbService;
@@ -88,6 +92,28 @@ export class CmsCrudService {
         });
 
         input.logger.info('Item created in target db', { result });
+
+        return result;
+    }
+
+    async readItemFromTargetDB(input: ReadItemFromTargetDB) {
+        const tenantDbUrl =
+            input.tenantDatabaseUrl ||
+            (await this.dbService.getTenantDBUrl({
+                tenantId: input.tenantId,
+            }));
+
+        const { Model, connection } = this.modelService.createModelFromConnection({
+            modelName: input.targetCollection,
+            url: tenantDbUrl,
+        });
+
+        const result = await this.dbService.readItemUsingConnection({
+            model: Model,
+            connection,
+            filter: input.filter,
+            logger: input.logger,
+        });
 
         return result;
     }

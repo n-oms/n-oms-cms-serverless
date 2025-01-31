@@ -1,6 +1,7 @@
 import { Logger } from '@aws-lambda-powertools/logger';
-import { getDdbItem, putDdbItem } from '../client';
+import { getDdbItem, putDdbItem, queryDdbItems } from '../client';
 import { NotFoundException } from '../../errors/not-found';
+import { TenantConfig } from '../../types';
 
 export class CmsTenantRegistry {
     static getPk() {
@@ -53,10 +54,17 @@ export class CmsTenantRegistry {
     }
 
     static async getAllTenants({ logger }: { logger: Logger }) {
-        const tenants = await getDdbItem({
-            pk: 'CMS#TENANT',
-            sk: 'CMS#TENANT',
+        const tenants = await queryDdbItems<TenantConfig>({
             logger,
+            query: {
+                KeyConditionExpression: '#PK = :pk',
+                ExpressionAttributeNames: {
+                    '#PK': 'PK',
+                },
+                ExpressionAttributeValues: {
+                    ':pk': this.getPk(),
+                },
+            },
         });
         return tenants;
     }

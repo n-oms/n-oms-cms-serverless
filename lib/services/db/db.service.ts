@@ -2,7 +2,7 @@ import { DB_URLS } from '../../constants';
 import { Tenant, tenantSchema } from '../../schemas/tenant';
 import { bindMethods } from '../../utils';
 import { ModelService } from '../model.service';
-import { CreateDbItemInput, UpdateDbItemInput } from './db.types';
+import { CreateDbItemInput, ReadItemUsingConnection, UpdateDbItemInput } from './db.types';
 
 export class DbService {
     private readonly modelService: ModelService;
@@ -72,6 +72,19 @@ export class DbService {
             return result;
         } catch (error) {
             logger.error({ message: 'Error creating item', error });
+        }
+    }
+
+    async readItemUsingConnection(input: ReadItemUsingConnection) {
+        try {
+            const filter = input.filter || {};
+            const result = await input.model.find(filter).exec();
+            if (input.closeConnection && input.connection) {
+                await input.connection.close();
+            }
+            return result;
+        } catch (error) {
+            input.logger.error({ message: 'Error reading item', error });
         }
     }
 }
