@@ -14,5 +14,6 @@ export const config: FunctionDefinition = {
     ],
     environment: {
         DYNAMODB_TABLE_NAME: DEPLOYMENT_ENVS.DYNAMODB_TABLE_NAME,
+        REGION: DEPLOYMENT_ENVS.REGION,
     },
 };

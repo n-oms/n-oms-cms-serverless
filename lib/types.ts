@@ -13,6 +13,9 @@ export enum CloudFormationResourceTypes {
     CLOUDWATCH_LOG_GROUP = 'AWS::Logs::LogGroup',
     IAM_ROLE = 'AWS::IAM::Role',
     IAM_POLICY = 'AWS::IAM::Policy',
+    COGNITO_USER_POOL = 'AWS::Cognito::UserPool',
+    COGNITO_USER_POOL_CLIENT = 'AWS::Cognito::UserPoolClient',
+    COGNITO_IDENTITY_POOL = 'AWS::Cognito::IdentityPool',
 }
 
 export type ResourceDefinition = {
@@ -52,6 +55,10 @@ export type TenantConfig = {
     apiKey: string;
     databaseUrl: string;
     tenantName: string;
+};
+
+export type AuthorizedApiEvent = APIGatewayProxyEvent & {
+    tenantInfo: TenantConfig;
 };
 
 export type StoreApiEvent = APIGatewayProxyEvent & {

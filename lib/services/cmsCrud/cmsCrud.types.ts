@@ -6,6 +6,7 @@ export type CreateInTargetDbInput = {
     isDataValidationRequired?: boolean;
     logger: Logger;
     tenantId: string;
+    targetDatabaseUrl?: string;
 };
 
 export type UpdateItemInTargetDbInput = {
@@ -15,6 +16,7 @@ export type UpdateItemInTargetDbInput = {
     isDataValidationRequired?: boolean;
     logger: Logger;
     tenantId: string;
+    targetDatabaseUrl?: string;
 };
 
 export type ReadItemFromTargetDB = {

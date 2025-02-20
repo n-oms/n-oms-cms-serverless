@@ -2,6 +2,7 @@ import { ZodError } from 'zod';
 import { lambdaResponse } from './utils';
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import { MiddlewareFn } from './middlewares/types';
+import { HttpError } from './errors/httpError';
 
 export const createLambdaHandler = ({
     handler,
@@ -18,16 +19,28 @@ export const createLambdaHandler = ({
 
             return await handler(event);
         } catch (error) {
-            if (error instanceof ZodError) {
-                return lambdaResponse({
-                    status: 400,
-                    data: { message: 'Validation Error', error: error.errors },
-                });
-            }
-            return lambdaResponse({
-                status: 500,
-                data: { message: 'Unknow error happened', error },
-            });
+            return handleError(error);
         }
     };
+};
+
+const handleError = (error: unknown) => {
+    if (error instanceof ZodError) {
+        return lambdaResponse({
+            status: 400,
+            data: { message: 'Validation Error', error: error.errors },
+        });
+    }
+
+    if (error instanceof HttpError) {
+        return lambdaResponse({
+            status: error.status,
+            data: { name: error.name, message: error.message },
+        });
+    }
+
+    return lambdaResponse({
+        status: 500,
+        data: { message: 'Internal Server Error', error: error },
+    });
 };

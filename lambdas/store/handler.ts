@@ -33,6 +33,36 @@ export class TenantStoreApiHandler {
                     tenantInfo: event.tenantInfo,
                     filter: data.filter,
                 });
+                break;
+            }
+            case TenantStoreApiActions.CREATE: {
+                const input = StoreApiSchemas.CreateData.parse({
+                    ...body,
+                    tenantInfo: event.tenantInfo,
+                });
+                response = await this.tenantStoreService.createData({
+                    logger: this.logger,
+                    targetCollection: input.targetCollection,
+                    data: input.data,
+                    tenantInfo: event.tenantInfo,
+                    addToBackOffice: input.addToBackOffice,
+                });
+                break;
+            }
+            case TenantStoreApiActions.UPDATE: {
+                const input = StoreApiSchemas.UpdateData.parse({
+                    ...body,
+                    tenantInfo: event.tenantInfo,
+                });
+
+                response = await this.tenantStoreService.updateData({
+                    logger: this.logger,
+                    targetCollection: input.targetCollection,
+                    data: input.data,
+                    filter: input.filter,
+                    tenantInfo: event.tenantInfo,
+                });
+                break;
             }
         }
         return lambdaResponse({ status: 200, data: response });

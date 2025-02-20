@@ -11,8 +11,8 @@ export const serverlessConfiguration: AWS = {
     provider: {
         name: 'aws',
         runtime: 'nodejs18.x',
-        region: env.REGION as AWS['provider']['region'],
-        stage: env.STAGE,
+        region: DEPLOYMENT_ENVS.REGION as AWS['provider']['region'],
+        stage: process.env.STAGE || 'dev',
         iamRoleStatements: [
             {
                 Effect: 'Allow',

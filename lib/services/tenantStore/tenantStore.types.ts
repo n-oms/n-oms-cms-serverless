@@ -7,3 +7,20 @@ export type ReadData = {
     filter?: Record<string, any>;
     logger: Logger;
 };
+
+export type CreateData = {
+    tenantInfo: TenantConfig;
+    targetCollection: string;
+    data: Record<string, any>;
+    logger: Logger;
+    addToBackOffice?: boolean;
+};
+
+export type UpdateData = {
+    tenantInfo: TenantConfig;
+    targetCollection: string;
+    data: Record<string, any>;
+    filter: Record<string, any>;
+    logger: Logger;
+    addToBackOffice?: boolean;
+};

@@ -19,9 +19,12 @@ export class CmsCrudService {
     }
 
     async createItemInTargetDb(input: CreateInTargetDbInput) {
-        const tenantDbUrl = await this.dbService.getTenantDBUrl({
-            tenantId: input.tenantId,
-        });
+        const tenantDbUrl =
+            input.targetDatabaseUrl ||
+            (await this.dbService.getTenantDatabaseUrl({
+                tenantId: input.tenantId,
+                logger: input.logger,
+            }));
 
         input.logger.info('Tenant DB URL', { tenantDbUrl });
 
@@ -61,10 +64,12 @@ export class CmsCrudService {
     }
 
     async updateItemInTargetDb(input: UpdateItemInTargetDbInput) {
-        console.log('Input', JSON.stringify(input));
-        const tenantDbUrl = await this.dbService.getTenantDBUrl({
-            tenantId: input.tenantId,
-        });
+        const tenantDbUrl =
+            input.targetDatabaseUrl ||
+            (await this.dbService.getTenantDatabaseUrl({
+                tenantId: input.tenantId,
+                logger: input.logger,
+            }));
 
         let data = input.data;
 
@@ -99,8 +104,9 @@ export class CmsCrudService {
     async readItemFromTargetDB(input: ReadItemFromTargetDB) {
         const tenantDbUrl =
             input.tenantDatabaseUrl ||
-            (await this.dbService.getTenantDBUrl({
+            (await this.dbService.getTenantDatabaseUrl({
                 tenantId: input.tenantId,
+                logger: input.logger,
             }));
 
         const { Model, connection } = this.modelService.createModelFromConnection({

@@ -1,4 +1,6 @@
+import { Logger } from '@aws-lambda-powertools/logger';
 import { DB_URLS } from '../../constants';
+import { CmsTenantRegistry } from '../../dynamodb/models/cms-tenant-registry';
 import { Tenant, tenantSchema } from '../../schemas/tenant';
 import { bindMethods } from '../../utils';
 import { ModelService } from '../model.service';
@@ -12,6 +14,21 @@ export class DbService {
         bindMethods(this);
     }
 
+    /**
+     * Retrieves the database URL for a specific tenant from the multi-tenant database.
+     *
+     * @deprecated This method is deprecated and will be removed in future versions.
+     * Use getUpdatedTenantDBUrl instead.
+     *
+     * @param {Object} params - The parameters object
+     * @param {string} params.tenantId - The unique identifier of the tenant
+     * @returns {Promise<string>} A promise that resolves to the tenant's database URL
+     * @throws {Error} When tenant database URL is not found
+     * @throws {Error} When database connection fails
+     *
+     * @example
+     * const dbUrl = await dbService.getTenantDBUrl({ tenantId: 'tenant123' });
+     */
     async getTenantDBUrl({ tenantId }: { tenantId: string }) {
         try {
             const { Model: TenantModel, connection } =
@@ -36,6 +53,17 @@ export class DbService {
             console.error('Database error:', error);
             throw error;
         }
+    }
+
+    async getTenantDatabaseUrl({
+        tenantId,
+        logger,
+    }: {
+        tenantId: string;
+        logger: Logger;
+    }): Promise<string> {
+        const tenantInfo = await CmsTenantRegistry.getTenantConfig({ tenantId, logger });
+        return tenantInfo.databaseUrl as string;
     }
 
     async createItemUsingConnection({

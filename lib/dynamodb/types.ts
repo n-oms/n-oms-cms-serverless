@@ -11,4 +11,9 @@ export type PutItem = {
     tableName?: string;
     item: Record<string, any>;
     logger: Logger;
+    options?: {
+        uniqueId?: {
+            field: string;
+        };
+    };
 };

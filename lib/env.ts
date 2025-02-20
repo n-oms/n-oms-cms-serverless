@@ -13,4 +13,5 @@ export const DEPLOYMENT_ENVS = {
     DYNAMODB_TABLE_NAME: '${env:DYNAMODB_TABLE_NAME}',
     ACCOUNT_ID: '${env:ACCOUNT_ID}',
     REGION: '${env:REGION}',
+    STAGE: '${env:STAGE}',
 };

@@ -13,7 +13,7 @@ export class CmsTenantRegistry {
     }
 
     static async getTenantConfig({ tenantId, logger }: { tenantId: string; logger: Logger }) {
-        const tenantConfig = await getDdbItem({
+        const tenantConfig = await getDdbItem<TenantConfig>({
             pk: this.getPk(),
             sk: this.getSk({ tenantId }),
             logger,

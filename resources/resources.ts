@@ -13,6 +13,7 @@ export const multiTenantNomsCmsSqsQueue: ResourceDefinition = {
     Type: CloudFormationResourceTypes.SQS_QUEUE,
     Properties: {
         QueueName: createResourceName('queue'),
+        VisibilityTimeout: 70,
         RedrivePolicy: {
             deadLetterTargetArn: {
                 'Fn::GetAtt': ['multiTenantNomsCmsDeadLetterQueue', 'Arn'],
@@ -37,6 +38,35 @@ export const cmsTenantRegistryTable: ResourceDefinition = {
         ProvisionedThroughput: {
             ReadCapacityUnits: 5,
             WriteCapacityUnits: 5,
+        },
+    },
+};
+
+export const multiTenantNomsCmsUserPool: ResourceDefinition = {
+    Type: CloudFormationResourceTypes.COGNITO_USER_POOL,
+    Properties: {
+        UserPoolName: createResourceName('users'),
+        AdminCreateUserConfig: {
+            AllowAdminCreateUserOnly: false,
+        },
+        AutoVerifiedAttributes: ['email'],
+        UsernameAttributes: ['email'],
+        Schema: [
+            {
+                Name: 'email',
+                AttributeDataType: 'String',
+                Required: true,
+                Mutable: true,
+            },
+        ],
+        Policies: {
+            PasswordPolicy: {
+                MinimumLength: 8,
+                RequireLowercase: true,
+                RequireNumbers: true,
+                RequireSymbols: true,
+                RequireUppercase: true,
+            },
         },
     },
 };
