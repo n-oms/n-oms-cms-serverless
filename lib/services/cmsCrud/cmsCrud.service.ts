@@ -1,9 +1,11 @@
+import { UserModel } from '../../dynamodb/models/users';
 import { bindMethods } from '../../utils';
 import { zodSchemas } from '../../validations';
 import { DbService } from '../db/db.service';
 import { ModelService } from '../model.service';
 import {
     CreateInTargetDbInput,
+    DeletItemFromTargetDb,
     ReadItemFromTargetDB,
     UpdateItemInTargetDbInput,
 } from './cmsCrud.types';
@@ -60,6 +62,22 @@ export class CmsCrudService {
 
         input.logger.info('Item created in target db', { result });
 
+        if (input.updateCmsUser && input.cmsUserUpdationInfo) {
+            if (!input.cmsUserUpdationInfo.email) {
+                throw new Error('Email is required to update CMS user');
+            }
+            const response = await UserModel.updateUser({
+                tenantId: input.tenantId,
+                email: input.cmsUserUpdationInfo.email,
+                data: input.cmsUserUpdationInfo.data,
+                logger: input.logger,
+            });
+
+            if (!response) {
+                input.logger.error('Error updating user', { response });
+            }
+        }
+
         return result;
     }
 
@@ -97,6 +115,46 @@ export class CmsCrudService {
         });
 
         input.logger.info('Item created in target db', { result });
+
+        if (input.updateCmsUser && input.cmsUserUpdationInfo) {
+            if (!input.cmsUserUpdationInfo.email) {
+                throw new Error('Email is required to update CMS user');
+            }
+            const response = await UserModel.updateUser({
+                tenantId: input.tenantId,
+                email: input.cmsUserUpdationInfo.email,
+                data: input.cmsUserUpdationInfo.data,
+                logger: input.logger,
+            });
+
+            if (!response) {
+                input.logger.error('Error updating user', { response });
+            }
+        }
+
+        return result;
+    }
+
+    async deleteItemFromTargetDb(input: DeletItemFromTargetDb) {
+        const tenantDbUrl =
+            input.targetDatabaseUrl ||
+            (await this.dbService.getTenantDatabaseUrl({
+                tenantId: input.tenantId,
+                logger: input.logger,
+            }));
+
+        const { Model: TargetCollectionModel, connection } =
+            this.modelService.createModelFromConnection({
+                url: tenantDbUrl,
+                modelName: input.targetCollection,
+            });
+
+        const result = await this.dbService.deleteItemUsingConnection({
+            model: TargetCollectionModel,
+            connection,
+            filter: input.filter,
+            logger: input.logger,
+        });
 
         return result;
     }

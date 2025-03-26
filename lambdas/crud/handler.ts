@@ -55,6 +55,17 @@ export class CmsCrudApiLambdaHandlerService implements ILambdaService {
                     targetCollection: body.targetCollection,
                     logger: this.logger,
                     tenantId: body.tenantId,
+                    updateCmsUser: body.updateCmsUser,
+                    cmsUserUpdationInfo: body.cmsUserUpdationInfo,
+                });
+            }
+            case CrudApiActions.DELETE: {
+                return await this.cmsCrudService.deleteItemFromTargetDb({
+                    filter: body.filter || {},
+                    targetCollection: body.targetCollection,
+                    logger: this.logger,
+                    tenantId: body.tenantId,
+                    targetDatabaseUrl: '',
                 });
             }
             default: {

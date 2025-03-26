@@ -64,6 +64,20 @@ export class TenantStoreApiHandler {
                 });
                 break;
             }
+            case TenantStoreApiActions.DELETE: {
+                const input = StoreApiSchemas.DeleteData.parse({
+                    ...body,
+                    tenantInfo: event.tenantInfo,
+                });
+
+                response = await this.tenantStoreService.deleteData({
+                    logger: this.logger,
+                    targetCollection: input.targetCollection,
+                    filter: input.filter,
+                    tenantInfo: event.tenantInfo,
+                });
+                break;
+            }
         }
         return lambdaResponse({ status: 200, data: response });
     }

@@ -29,3 +29,11 @@ export type ReadItemUsingConnection = {
     connection: mongoose.Connection;
     closeConnection?: boolean;
 };
+
+export type DeletItemUsingCollection = {
+    model: mongoose.Model<any>;
+    filter: Record<string, any>;
+    logger: Logger;
+    connection: mongoose.Connection;
+    closeConnection?: boolean;
+};

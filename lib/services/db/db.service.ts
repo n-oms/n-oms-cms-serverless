@@ -4,7 +4,12 @@ import { CmsTenantRegistry } from '../../dynamodb/models/cms-tenant-registry';
 import { Tenant, tenantSchema } from '../../schemas/tenant';
 import { bindMethods } from '../../utils';
 import { ModelService } from '../model.service';
-import { CreateDbItemInput, ReadItemUsingConnection, UpdateDbItemInput } from './db.types';
+import {
+    CreateDbItemInput,
+    DeletItemUsingCollection,
+    ReadItemUsingConnection,
+    UpdateDbItemInput,
+} from './db.types';
 
 export class DbService {
     private readonly modelService: ModelService;
@@ -113,6 +118,18 @@ export class DbService {
             return result;
         } catch (error) {
             input.logger.error({ message: 'Error reading item', error });
+        }
+    }
+
+    async deleteItemUsingConnection(input: DeletItemUsingCollection) {
+        try {
+            const result = await input.model.deleteOne(input.filter);
+            if (input.closeConnection && input.connection) {
+                await input.connection.close();
+            }
+            return result;
+        } catch (error) {
+            input.logger.error({ message: 'Error deleting item', error });
         }
     }
 }

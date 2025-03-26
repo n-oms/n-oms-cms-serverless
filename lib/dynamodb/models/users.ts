@@ -1,5 +1,7 @@
 import { Logger } from '@aws-lambda-powertools/logger';
 import { getDdbItem, putDdbItem, updateItem } from '../client';
+import { User } from '../../types';
+import { sanitizeEntity } from '../utils';
 
 export class UserModel {
     static getPk({ tenantId }: { tenantId: string }) {
@@ -21,12 +23,14 @@ export class UserModel {
         data: any;
         logger: Logger;
     }) {
-        const userInfo = {
+        const userInfo: User = {
             ...data,
             email,
             tenantId,
             PK: this.getPk({ tenantId }),
             SK: this.getSk({ email }),
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
         };
 
         const response = await putDdbItem({
@@ -39,7 +43,12 @@ export class UserModel {
             },
         });
 
-        return response;
+        if (response.$metadata.httpStatusCode !== 200) {
+            logger.error('Error creating user', { response });
+            return undefined;
+        }
+
+        return sanitizeEntity(userInfo);
     }
 
     static async getUser({
@@ -51,12 +60,18 @@ export class UserModel {
         tenantId: string;
         logger: Logger;
     }) {
-        const response = await getDdbItem({
+        const user = await getDdbItem<User>({
             pk: this.getPk({ tenantId }),
             sk: this.getSk({ email }),
             logger,
         });
-        return response;
+
+        if (!user) {
+            logger.error('User not found');
+            return undefined;
+        }
+
+        return sanitizeEntity(user);
     }
 
     static async updateUser({
@@ -74,8 +89,17 @@ export class UserModel {
             pk: this.getPk({ tenantId }),
             sk: this.getSk({ email }),
             logger,
-            attributesToUpdate: data,
+            attributesToUpdate: {
+                ...data,
+                updatedAt: new Date().toISOString(),
+            },
         });
-        return response;
+
+        if (response.$metadata.httpStatusCode !== 200) {
+            logger.error('Error updating user', { response });
+            return undefined;
+        }
+
+        return response.Attributes;
     }
 }

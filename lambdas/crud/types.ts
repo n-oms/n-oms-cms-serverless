@@ -14,6 +14,13 @@ export const crudApiBodySchema = z.object({
     tenantId: z.string(),
     targetCollection: z.string(),
     filter: z.record(z.unknown()).optional(),
+    updateCmsUser: z.boolean().optional(),
+    cmsUserUpdationInfo: z
+        .object({
+            email: z.string(),
+            data: z.record(z.unknown()),
+        })
+        .optional(),
 });
 
 export type CrudApiBody = z.infer<typeof crudApiBodySchema>;

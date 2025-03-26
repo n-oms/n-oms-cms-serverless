@@ -1,7 +1,7 @@
 import { env } from '../../env';
 import { bindMethods } from '../../utils';
 import { CmsCrudService } from '../cmsCrud/cmsCrud.service';
-import { CreateData, ReadData, UpdateData } from './tenantStore.types';
+import { CreateData, DeleteData, ReadData, UpdateData } from './tenantStore.types';
 import { TenantStoreUtils } from './utils';
 
 export class TenantStoreService {
@@ -51,6 +51,18 @@ export class TenantStoreService {
     async updateData(input: UpdateData) {
         const response = await this.cmsCrudService.updateItemInTargetDb({
             data: input.data,
+            logger: input.logger,
+            targetCollection: input.targetCollection,
+            tenantId: input.tenantInfo.tenantId,
+            targetDatabaseUrl: input.tenantInfo.databaseUrl,
+            filter: input.filter,
+            cmsUserUpdationInfo: input.cmsUserUpdationInfo,
+        });
+        return response;
+    }
+
+    async deleteData(input: DeleteData) {
+        const response = await this.cmsCrudService.deleteItemFromTargetDb({
             logger: input.logger,
             targetCollection: input.targetCollection,
             tenantId: input.tenantInfo.tenantId,

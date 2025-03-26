@@ -23,4 +23,16 @@ export type UpdateData = {
     filter: Record<string, any>;
     logger: Logger;
     addToBackOffice?: boolean;
+    updateCmsUser?: boolean;
+    cmsUserUpdationInfo?: {
+        email: string;
+        data: Record<string, unknown>;
+    };
+};
+
+export type DeleteData = {
+    tenantInfo: TenantConfig;
+    targetCollection: string;
+    filter: Record<string, any>;
+    logger: Logger;
 };

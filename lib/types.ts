@@ -64,3 +64,11 @@ export type AuthorizedApiEvent = APIGatewayProxyEvent & {
 export type StoreApiEvent = APIGatewayProxyEvent & {
     tenantInfo: TenantConfig;
 };
+
+export type User = {
+    email: string;
+    tenantId: string;
+    [key: string]: unknown;
+    createdAt: string;
+    updatedAt: string;
+};

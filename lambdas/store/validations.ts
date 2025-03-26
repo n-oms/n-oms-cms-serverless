@@ -27,4 +27,12 @@ export const StoreApiSchemas = {
         data: z.record(z.unknown()),
         filter: z.record(z.unknown()),
     }),
+    DeleteData: z.object({
+        tenantInfo: z.object({
+            tenantId: z.string(),
+            databaseUrl: z.string(),
+        }),
+        targetCollection: z.string(),
+        filter: z.record(z.unknown()),
+    }),
 };

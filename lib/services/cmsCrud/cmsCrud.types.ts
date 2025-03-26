@@ -7,6 +7,11 @@ export type CreateInTargetDbInput = {
     logger: Logger;
     tenantId: string;
     targetDatabaseUrl?: string;
+    updateCmsUser?: boolean;
+    cmsUserUpdationInfo?: {
+        email: string;
+        data: Record<string, unknown>;
+    };
 };
 
 export type UpdateItemInTargetDbInput = {
@@ -17,6 +22,11 @@ export type UpdateItemInTargetDbInput = {
     logger: Logger;
     tenantId: string;
     targetDatabaseUrl?: string;
+    updateCmsUser?: boolean;
+    cmsUserUpdationInfo?: {
+        email: string;
+        data: Record<string, unknown>;
+    };
 };
 
 export type ReadItemFromTargetDB = {
@@ -25,4 +35,12 @@ export type ReadItemFromTargetDB = {
     logger: Logger;
     tenantId: string;
     tenantDatabaseUrl: string;
+};
+
+export type DeletItemFromTargetDb = {
+    targetCollection: string;
+    filter: Record<string, unknown>;
+    logger: Logger;
+    tenantId: string;
+    targetDatabaseUrl: string;
 };
