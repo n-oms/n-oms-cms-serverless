@@ -19,3 +19,8 @@ export type UpdateUser = {
     logger: Logger;
     data: any;
 };
+
+export type GetAllUsers = {
+    tenantId: string;
+    logger: Logger;
+};
