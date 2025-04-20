@@ -48,6 +48,14 @@ export class CmsAuthenticationLambdaHandler {
                 break;
             }
 
+            case UserActions.GET_ALL_USERS: {
+                result = await this.userService.getAllUsers({
+                    tenantId: event.tenantInfo.tenantId,
+                    logger: this.logger,
+                });
+                break;
+            }
+
             case UserActions.UPDATE_USER: {
                 const input = UserHandlerSchemas.UpdateUser.parse(body);
                 result = await this.userService.updateUser({

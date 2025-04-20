@@ -6,6 +6,7 @@ export const env = {
     ACCOUNT_ID: process.env.ACCOUNT_ID,
     MULTI_TENANT_DB_URL: process.env.MULTI_TENANT_DB_URL,
     DYNAMODB_TABLE_NAME: process.env.DYNAMODB_TABLE_NAME,
+    WEBSOCKET_CONNECTIONS_TABLE: process.env.WEBSOCKET_CONNECTIONS_TABLE,
 };
 
 export const DEPLOYMENT_ENVS = {
@@ -14,4 +15,5 @@ export const DEPLOYMENT_ENVS = {
     ACCOUNT_ID: '${env:ACCOUNT_ID}',
     REGION: '${env:REGION}',
     STAGE: '${env:STAGE}',
+    WEBSOCKET_CONNECTIONS_TABLE: '${env:WEBSOCKET_CONNECTIONS_TABLE}',
 };

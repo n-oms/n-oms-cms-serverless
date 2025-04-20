@@ -1,3 +1,4 @@
+import { Logger } from '@aws-lambda-powertools/logger';
 import { UserModel } from '../../dynamodb/models/users';
 import { BadRequestException } from '../../errors/badrequestException';
 import { bindMethods } from '../../utils';
@@ -31,6 +32,13 @@ export class UserService {
     async getUser(input: GetUser) {
         return await UserModel.getUser({
             email: input.email,
+            tenantId: input.tenantId,
+            logger: input.logger,
+        });
+    }
+
+    async getAllUsers(input: { tenantId: string; logger: Logger }) {
+        return await UserModel.getAllUsers({
             tenantId: input.tenantId,
             logger: input.logger,
         });
