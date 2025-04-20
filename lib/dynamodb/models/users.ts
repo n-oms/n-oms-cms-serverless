@@ -1,5 +1,5 @@
 import { Logger } from '@aws-lambda-powertools/logger';
-import { getDdbItem, putDdbItem, queryDdbItems, updateItem } from '../client';
+import { getDdbItem, putDdbItem, updateItem } from '../client';
 import { User } from '../../types';
 import { sanitizeEntity } from '../utils';
 
@@ -72,43 +72,6 @@ export class UserModel {
         }
 
         return sanitizeEntity(user);
-    }
-
-    static async getAllUsers({
-        tenantId,
-        logger,
-    }: {
-        tenantId: string;
-        logger: Logger;
-    }) {
-        logger.info('Getting all users for tenant', { tenantId });
-        
-        try {
-            const users = await queryDdbItems<User>({
-                logger,
-                query: {
-                    KeyConditionExpression: '#PK = :pk AND begins_with(#SK, :sk)',
-                    ExpressionAttributeNames: {
-                        '#PK': 'PK',
-                        '#SK': 'SK',
-                    },
-                    ExpressionAttributeValues: {
-                        ':pk': this.getPk({ tenantId }),
-                        ':sk': 'USER#',
-                    },
-                },
-            });
-            
-            if (!users || users.length === 0) {
-                logger.info('No users found for tenant', { tenantId });
-                return [];
-            }
-            
-            return users.map(user => sanitizeEntity(user));
-        } catch (error) {
-            logger.error('Error fetching all users', { error, tenantId });
-            throw error;
-        }
     }
 
     static async updateUser({

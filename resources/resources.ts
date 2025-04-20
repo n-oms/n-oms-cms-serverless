@@ -70,37 +70,3 @@ export const multiTenantNomsCmsUserPool: ResourceDefinition = {
         },
     },
 };
-
-// Add to resources.ts
-export const websocketConnectionsTable: ResourceDefinition = {
-    Type: CloudFormationResourceTypes.DYNAMO_TABLE,
-    Properties: {
-        TableName: DEPLOYMENT_ENVS.WEBSOCKET_CONNECTIONS_TABLE,
-        AttributeDefinitions: [
-            { AttributeName: 'connectionId', AttributeType: 'S' },
-            { AttributeName: 'tenantId', AttributeType: 'S' },
-        ],
-        KeySchema: [
-            { AttributeName: 'connectionId', KeyType: 'HASH' },
-        ],
-        GlobalSecondaryIndexes: [
-            {
-                IndexName: 'tenantId-index',
-                KeySchema: [
-                    { AttributeName: 'tenantId', KeyType: 'HASH' },
-                ],
-                Projection: {
-                    ProjectionType: 'ALL',
-                },
-                ProvisionedThroughput: {
-                    ReadCapacityUnits: 5,
-                    WriteCapacityUnits: 5,
-                },
-            },
-        ],
-        ProvisionedThroughput: {
-            ReadCapacityUnits: 5,
-            WriteCapacityUnits: 5,
-        },
-    },
-};
