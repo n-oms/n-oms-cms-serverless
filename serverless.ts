@@ -24,13 +24,29 @@ export const serverlessConfiguration: AWS = {
                     'dynamodb:Query',
                     'dynamodb:Scan',
                 ],
-                Resource: [createDynamoArn({ tableName: DEPLOYMENT_ENVS.DYNAMODB_TABLE_NAME })],
+                Resource: [
+                    createDynamoArn({ tableName: DEPLOYMENT_ENVS.DYNAMODB_TABLE_NAME }),
+                    createDynamoArn({ tableName: DEPLOYMENT_ENVS.WEBSOCKET_CONNECTIONS_TABLE }),
+                ],
+            },
+            {
+                Effect: 'Allow',
+                Action: [
+                    'execute-api:ManageConnections',
+                ],
+                Resource: [
+                    `arn:aws:execute-api:${DEPLOYMENT_ENVS.REGION}:${DEPLOYMENT_ENVS.ACCOUNT_ID}:*/*/*/*`
+                ],
             },
         ],
+        websocketsApiRouteSelectionExpression: '$request.body.action',
     },
     package: {
         individually: true,
         excludeDevDependencies: true,
+    },
+    custom: {
+        websocketApiName: '${self:service}-websocket-api-${self:provider.stage}',
     },
     functions: createLambdaFunctionList({ lambdas }),
     resources: {
